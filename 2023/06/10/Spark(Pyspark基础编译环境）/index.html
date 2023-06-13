@@ -102,47 +102,47 @@
 <li><p>然后用记事本打开:C:\Users\用户名\<code>.condarc文件</code>, 将如下内容替换进文件内,保存即可:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">channels:</span><br><span class="line"> - defaults</span><br><span class="line">show_channel_urls: true</span><br><span class="line">default_channels:</span><br><span class="line"> - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main</span><br><span class="line"> - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r</span><br><span class="line"> - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2</span><br><span class="line">custom_channels:</span><br><span class="line"> conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line"> msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line"> bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line"> menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line"> pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line"> simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br></pre></td></tr></table></figure></li>
 </ul>
-<p><img src="/images/1.png" alt="1.png"></p>
+<p><img src="/../images1/1.png" alt="1.png"></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">在虚拟环境内安装包</span></span><br><span class="line">pip install pyhive pyspark jieba -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>安装完成后结果见下图：</li>
 </ul>
-<p><img src="/../images/2.png" alt="2.png"></p>
+<p><img src="/../images1/2.png" alt="2.png"></p>
 <ul>
 <li><p>在本机中还需要<code>安装Hadoop DDL</code>，因为PySpark在运行计算服务过程中会使用到Hadoop中的Mapreduce服务，所以需要在本机中添加补丁：</p>
 </li>
 <li><p>将课程资料中提供的: <code>hadoop-3.3.0 文件</code>, 解压复制到本机,例如：</p>
 </li>
 </ul>
-<p><img src="/../images/3.png" alt="3.png"></p>
+<p><img src="/../images1/3.png" alt="3.png"></p>
 <ul>
 <li>并把bin目录下的hadoop.dll复制到<code>C:\Windows\System32\</code>路径下:</li>
 </ul>
-<p><img src="/../images/4.png" alt="4.png"></p>
+<p><img src="/../images1/4.png" alt="4.png"></p>
 <ul>
 <li>在本机的环境变量的系统变量设置中<code>配置HADOOP_HOME环境变量</code>指向 hadoop-3.3.0文件夹的路径：</li>
 </ul>
-<p><img src="/../images/5.png" alt="5.png"></p>
+<p><img src="/../images1/5.png" alt="5.png"></p>
 <h1 id="7-2在PyCharm中配置本地Python解释器"><a href="#7-2在PyCharm中配置本地Python解释器" class="headerlink" title="7.2在PyCharm中配置本地Python解释器"></a>7.2在PyCharm中配置本地Python解释器</h1><ul>
 <li>首先需要下载<a target="_blank" rel="noopener" href="https://www.jetbrains.com/pycharm/">专业版Pycharm</a>，在PyCharm中的设置中配置Python解析器。</li>
 </ul>
-<p><img src="/../images/6.png" alt="6.png"></p>
+<p><img src="/../images1/6.png" alt="6.png"></p>
 <ul>
 <li>配置Linux环境中的Pyspark解释器，这样才能通过本机的Python Spark脚本运行对Linux进行远程运算：</li>
 <li>设置远程SSH python Pyspark环境</li>
 </ul>
-<p><img src="/../images/7.png" alt="7.png"></p>
+<p><img src="/../images1/7.png" alt="7.png"></p>
 <ul>
 <li>设置虚拟机中的python环境路径：</li>
 <li>可以先查看Linux中的pyspark中的python路径，方便添加到pycharm的解释器中，以本机的路径为例：  <code>/export/server/anaconda3/envs/pyspark/bin/python3</code></li>
 </ul>
-<p><img src="/../images/8.png" alt="8.png"></p>
-<p><img src="/../images/9.png" alt="9.png"></p>
+<p><img src="/../images1/8.png" alt="8.png"></p>
+<p><img src="/../images1/9.png" alt="9.png"></p>
 <ul>
 <li><code>将Anaconda中Pyspark路径添加至本机的环境变量</code>，否则在接下来的Pyspark Python代码执行时无法调用Pyspark：</li>
 </ul>
-<p><img src="/../images/10.png" alt="10.png"></p>
+<p><img src="/../images1/10.png" alt="10.png"></p>
 <h1 id="7-3导入构建Pyspark-python脚本文件"><a href="#7-3导入构建Pyspark-python脚本文件" class="headerlink" title="7.3导入构建Pyspark python脚本文件"></a>7.3导入构建Pyspark python脚本文件</h1><ul>
 <li>新建名为Pyspark的项目，<code>解释器选择本机的Pyspark python环境</code>，新建HelloWorld.py文件，导入以下代码：</li>
 </ul>
@@ -150,7 +150,7 @@
 <ul>
 <li>在本地新建文件word.txt加入一些文本，并添加本地路径至代码中：</li>
 </ul>
-<p><img src="/../images/11.png" alt="11.png"></p>
+<p><img src="/../images1/11.png" alt="11.png"></p>
 <ul>
 <li><strong>特别注意的是在本地执行wordcount计数时，pyspark的本机环境需提前配置或者可以在代码中手动引用Pyspark Python环境变量，例如：</strong></li>
 </ul>
@@ -159,38 +159,38 @@
 <li>在本地RDD读取words.txt进行WordCount计数：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#在读取文件代码下只开启：</span><br><span class="line">file_rdd = sc.textFile(&quot;./data/input/words.txt&quot;)</span><br></pre></td></tr></table></figure></li>
 <li>选择本地的Pyspark Python解释器并运行：</li>
 </ul>
-<p><img src="/../images/12.png" alt="12.png"></p>
+<p><img src="/../images1/12.png" alt="12.png"></p>
 <ul>
 <li>在本地RDD读取Linux中HDFS上的words.txt进行WordCount计数:</li>
 <li>首先需在HDFS上<code>创建并放置words.txt文件</code>:</li>
 </ul>
-<p><img src="/../images/13.png" alt="13.png"></p>
+<p><img src="/../images1/13.png" alt="13.png"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> #在读取文件代码中设置HDFS上的路径：</span><br><span class="line">file_rdd = sc.textFile(&quot;hdfs://node1:8020/input/words.txt&quot;)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>选择本地的Pyspark Python解释器并运行：</li>
 </ul>
-<p><img src="/../images/14.png" alt="14.png"></p>
+<p><img src="/../images1/14.png" alt="14.png"></p>
 <ul>
 <li>在Linux中RDD读取Linux中的words.txt进行WordCount计数：</li>
 <li>首先<code>在远程服务器端创建对应的Pycharm项目路径及文件</code>，例如：</li>
 </ul>
-<p><img src="/../images/15.png" alt="15.png"></p>
+<p><img src="/../images1/15.png" alt="15.png"></p>
 <blockquote>
 <p><strong>Pycharm中也有功能对远程服务器进行同步文件</strong></p>
 </blockquote>
 <ul>
 <li>在远程端激活Pyspark环境，将HelloWord.py文件中读取文件下的代码<code>只开启读取远程服务器下的路径</code>：</li>
 </ul>
-<p><img src="/../images/16.png" alt="16.png"></p>
+<p><img src="/../images1/16.png" alt="16.png"></p>
 <ul>
 <li>在本地切换为远程Pyspark Python解释器，并运行：</li>
 </ul>
-<p><img src="/../images/17.png" alt="17.png"></p>
+<p><img src="/../images1/17.png" alt="17.png"></p>
 <ul>
 <li>将代码提交至YARN集群进行测试：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/spark-submit --master yarn --name wordcount /HelloWorld.py</span><br></pre></td></tr></table></figure>
-<img src="/../images/18.png" alt="18.png"></li>
+<img src="/../images1/18.png" alt="18.png"></li>
 </ul>
-<p><img src="/../images/19.png" alt="19.png"></p>
+<p><img src="/../images1/19.png" alt="19.png"></p>
 <p><strong>在运行Pyspark过程中需要注意的问题：</strong></p>
 <blockquote>
 <ol>
@@ -210,7 +210,12 @@
 
             
             <nav class="dis_flex al_post_nav">
-                <a class="al_post_nav_item dis_flex_acenter" href="/">
+                <a class="al_post_nav_item dis_flex_acenter" href="/2023/06/13/hive%E6%95%99%E7%A8%8B/">
+                    
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-left"></use>
+                        </svg>
+                        <span class="al_text_ellipsis al_post_nav_desc"></span>
                     
                 </a>
                 <a class="al_post_nav_item dis_flex_acenter" href="/2023/06/10/hello-world/">
