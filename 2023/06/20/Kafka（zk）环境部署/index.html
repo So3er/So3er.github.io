@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        
+    
+    <link rel='stylesheet' href="/./css/dracula.css">
+
+        <title>Kafka zookeeper 环境部署</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="manifest" href="/site.webmanifest">
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <header class="al_header al_pos_fixed">
+    <div class="al_header_container dis_flex_jcenter">
+        <div class="al_header_container_left">
+            <div class="al_header_site_title">
+                <a href="/">Hexo</a>
+            </div>
+        </div>
+
+        <div class="dis_flex_jcenter">
+            <div class="al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-menu"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="al_sidebar">
+
+    <div class="al_sidebar_overlay al_full_cover"></div>
+
+    <div class="al_pos_fixed al_sidebar_cnt">
+        <div class="dis_flex_acenter al_sidebar_header">
+            <h3>Hexo</h3>
+            <div class="al_sidebar_close al_header_setting">
+                <svg class="al_header_icon">
+                    <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-close"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="al_sidebar_author_cnt">
+
+            <div class="al_sidebar_author_info">
+                <h4>John Doe</h4>
+                <img class="al_sidebar_avatar" src="https://yourAvatorURL">
+                <p></p>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+        
+    <div class="dis_flex_center al_lightbox_cnt al_full_cover">
+        <img class="al_lightbox_img"/>
+    </div>
+    <div class="al_page_background dis_flex_center al_full_cover"></div>
+    <div class="al_page_container">
+        <div class="al_pos_ab al_fake_background"></div>
+        <div class="al_main_container al_shadow al_main_page_container">
+            <article class="al_article">
+                <header>
+                    <h1 class="al_page_title">
+                        Kafka zookeeper 环境部署
+                    </h1>
+                    <div class="al_page_info dis_flex">
+                        <div class="al_page_content_info">
+                            Tue June 20, 2023 01:04 PM
+                        </div>
+
+                        
+
+                        
+                        <span class="tags"></span>
+                    </div>
+                </header>
+
+                
+                    <div class="al_page_content_outline">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Zookeeper"><span class="toc-text">Zookeeper</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%88%9D%E5%A7%8Bzookeeper"><span class="toc-text">一、初始zookeeper</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zookeeper-%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD%EF%BC%9A"><span class="toc-text">Zookeeper 的主要功能：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Zookeeper%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="toc-text">Zookeeper的工作原理：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ZooKeeper%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%BF%90%E8%BD%AC%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="toc-text">ZooKeeper的基本运转流程：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Zookeeper%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-text">二、Zookeeper的安装与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-text">第一步 准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E8%A7%A3%E5%8E%8B"><span class="toc-text">第二步 解压</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">第三步 环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">第四步 配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5-%E6%B7%BB%E5%8A%A0myid%E9%85%8D%E7%BD%AE"><span class="toc-text">第五步 添加myid配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E6%AD%A5-%E5%AE%89%E8%A3%85%E5%8C%85%E5%88%86%E5%8F%91%E5%B9%B6%E4%BF%AE%E6%94%B9myid%E7%9A%84%E5%80%BC"><span class="toc-text">第六步 安装包分发并修改myid的值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%9C%A8node1%E4%B8%BB%E6%9C%BA%E4%B8%8A%EF%BC%8C%E5%B0%86%E5%AE%89%E8%A3%85%E5%8C%85%E5%88%86%E5%8F%91%E5%88%B0%E5%85%B6%E4%BB%96%E6%9C%BA%E5%99%A8"><span class="toc-text">（1）在node1主机上，将安装包分发到其他机器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%AC%AC%E4%BA%8C%E5%8F%B0%E6%9C%BA%E5%99%A8%E4%B8%8A%E5%BB%BA%E7%AB%8B%E8%BD%AF%E8%BF%9E%E6%8E%A5-%E5%B9%B6%E4%BF%AE%E6%94%B9myid%E7%9A%84%E5%80%BC%E4%B8%BA2"><span class="toc-text">（2）第二台机器上建立软连接, 并修改myid的值为2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E7%AC%AC%E4%B8%89%E5%8F%B0%E6%9C%BA%E5%99%A8%E4%B8%8A%E5%BB%BA%E7%AB%8B%E8%BD%AF%E8%BF%9E%E6%8E%A5-%E5%B9%B6%E4%BF%AE%E6%94%B9myid%E7%9A%84%E5%80%BC%E4%B8%BA3"><span class="toc-text">（3）第三台机器上建立软连接, 并修改myid的值为3</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%B8%89%E5%8F%B0%E6%9C%BA%E5%99%A8%E5%90%AF%E5%8A%A8zookeeper%E6%9C%8D%E5%8A%A1%E6%B5%8B%E8%AF%95"><span class="toc-text">三、三台机器启动zookeeper服务测试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="toc-text">第一步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5"><span class="toc-text">第二步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%951%EF%BC%9A"><span class="toc-text">方法1：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E9%97%AE%E9%A2%98%E4%B8%8E%E6%80%BB%E7%BB%93"><span class="toc-text">四、问题与总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%97%B6%EF%BC%8C"><span class="toc-text">同时，</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E4%B8%8A%EF%BC%8C"><span class="toc-text">综上，</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                
+
+                
+                <section id="post-body">
+                    <h1 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h1><h2 id="一、初始zookeeper"><a href="#一、初始zookeeper" class="headerlink" title="一、初始zookeeper"></a>一、初始zookeeper</h2><p>ZooKeeper是一个分布式的，开放源码的分布式应用程序协调服务，是Google的Chubby一个开源的实现，是Hadoop和Hbase的重要组件。它是一个为分布式应用提供一致性服务的软件。<br>Zookeeper 是 Apache Hadoop 项目下的一个子项目，是一个树形目录服务。Zookeeper 翻译过来就是 动物园管理员，他是用来管 Hadoop（大象）、Hive(蜜蜂)、Pig(小 猪)的管理员，简称zk。</p>
+<h3 id="Zookeeper-的主要功能："><a href="#Zookeeper-的主要功能：" class="headerlink" title="Zookeeper 的主要功能："></a>Zookeeper 的主要功能：</h3><p>配置管理<br>分布式锁<br>集群管理</p>
+<h3 id="Zookeeper的工作原理："><a href="#Zookeeper的工作原理：" class="headerlink" title="Zookeeper的工作原理："></a>Zookeeper的工作原理：</h3><p>ZooKeeper是以Fast Paxos算法为基础的，Paxos 算法存在活锁的问题，即当有多个proposer交错提交时，有可能互相排斥导致没有一个proposer能提交成功，而Fast Paxos做了一些优化，通过选举产生一个leader (领导者)，只有leader才能提交proposer，具体算法可见Fast Paxos。因此，要想弄懂ZooKeeper首先得对Fast Paxos有所了解。</p>
+<h3 id="ZooKeeper的基本运转流程："><a href="#ZooKeeper的基本运转流程：" class="headerlink" title="ZooKeeper的基本运转流程："></a>ZooKeeper的基本运转流程：</h3><p>1、选举Leader。<br>2、同步数据。<br>3、选举Leader过程中算法有很多，但要达到的选举标准是一致的。<br>4、Leader要具有最高的执行ID，类似root权限。<br>5、集群中大多数的机器得到响应并接受选出的Leader。</p>
+<p><img src="/../imagek/1.png"></p>
+<h1 id="二、Zookeeper的安装与配置"><a href="#二、Zookeeper的安装与配置" class="headerlink" title="二、Zookeeper的安装与配置"></a>二、Zookeeper的安装与配置</h1><h2 id="第一步-准备工作"><a href="#第一步-准备工作" class="headerlink" title="第一步 准备工作"></a>第一步 准备工作</h2><p>安装前需要安装好jdk<br>检测集群时间是否同步<br>检测防火墙是否关闭<br>检测主机 ip映射有没有配置</p>
+<p><img src="/../imagek/2.png"></p>
+<p><img src="/../imagek/3.png"></p>
+<h2 id="第二步-解压"><a href="#第二步-解压" class="headerlink" title="第二步 解压"></a>第二步 解压</h2><p>在node1主机上，解压zookeeper的压缩包到&#x2F;export&#x2F;server路径下去，然后准备进行安装<br>cd &#x2F;export&#x2F;software<br>tar -zxvf zookeeper.tar.gz -C &#x2F;export&#x2F;server&#x2F;</p>
+<p><img src="/../imagek/4.png"></p>
+<p>cd &#x2F;export&#x2F;server&#x2F;<br>ln -s zookeeper&#x2F; zookeeper</p>
+<p><img src="/../imagek/5.png"></p>
+<h2 id="第三步-环境变量"><a href="#第三步-环境变量" class="headerlink" title="第三步 环境变量"></a>第三步 环境变量</h2><p>vi &#x2F;etc&#x2F;profile<br>export ZOOKEEPER_HOME&#x3D;&#x2F;export&#x2F;server&#x2F;zookeeper<br>export PATH&#x3D;$PATH:$ZOOKEEPER_HOME&#x2F;bin<br>source &#x2F;etc&#x2F;profile</p>
+<p><img src="/../imagek/6.png"></p>
+<p><img src="/../imagek/7.png"></p>
+<h2 id="第四步-配置文件"><a href="#第四步-配置文件" class="headerlink" title="第四步 配置文件"></a>第四步 配置文件</h2><p>修改Zookeeper配置文件<br>cd &#x2F;export&#x2F;server&#x2F;zookeeper&#x2F;conf&#x2F;<br>cp zoo_sample.cfg zoo.cfg：</p>
+<p><img src="/../imagek/8.png"></p>
+<p>mkdir -p &#x2F;export&#x2F;data&#x2F;zookeeper&#x2F;zkdatas&#x2F;<br>vim zoo.cfg</p>
+<p><img src="/../imagek/9.png"></p>
+<h2 id="第五步-添加myid配置"><a href="#第五步-添加myid配置" class="headerlink" title="第五步 添加myid配置"></a>第五步 添加myid配置</h2><p>echo 1 &gt; &#x2F;export&#x2F;data&#x2F;zkdatas&#x2F;myid</p>
+<p><img src="/../imagek/10.png"></p>
+<h2 id="第六步-安装包分发并修改myid的值"><a href="#第六步-安装包分发并修改myid的值" class="headerlink" title="第六步 安装包分发并修改myid的值"></a>第六步 安装包分发并修改myid的值</h2><h3 id="（1）在node1主机上，将安装包分发到其他机器"><a href="#（1）在node1主机上，将安装包分发到其他机器" class="headerlink" title="（1）在node1主机上，将安装包分发到其他机器"></a>（1）在node1主机上，将安装包分发到其他机器</h3><p>第一台机器上面执行以下两个命令<br>cd &#x2F;export&#x2F;server&#x2F;<br>scp -r &#x2F;export&#x2F;server&#x2F;zookeeper-3.4.6&#x2F; root@node2:&#x2F;export&#x2F;server&#x2F;</p>
+<p><img src="/../imagek/11.png"></p>
+<p>scp -r &#x2F;export&#x2F;server&#x2F;zookeeper-3.4.6&#x2F; root@node2:&#x2F;export&#x2F;server&#x2F;</p>
+<p><img src="/../imagek/12.png"></p>
+<h3 id="（2）第二台机器上建立软连接-并修改myid的值为2"><a href="#（2）第二台机器上建立软连接-并修改myid的值为2" class="headerlink" title="（2）第二台机器上建立软连接, 并修改myid的值为2"></a>（2）第二台机器上建立软连接, 并修改myid的值为2</h3><p>cd &#x2F;export&#x2F;server&#x2F;<br>ln -s zookeeper-3.4.6&#x2F; zookeeper<br>echo 2 &gt; &#x2F;export&#x2F;data&#x2F;zookeeper&#x2F;zkdatas&#x2F;yid</p>
+<p><img src="/../imagek/13.png"></p>
+<h3 id="（3）第三台机器上建立软连接-并修改myid的值为3"><a href="#（3）第三台机器上建立软连接-并修改myid的值为3" class="headerlink" title="（3）第三台机器上建立软连接, 并修改myid的值为3"></a>（3）第三台机器上建立软连接, 并修改myid的值为3</h3><p>cd &#x2F;export&#x2F;server&#x2F;<br>ln -s zookeeper-3.4.6&#x2F; zookeeper</p>
+<p><img src="/../imagek/14.png"></p>
+<h1 id="三、三台机器启动zookeeper服务测试"><a href="#三、三台机器启动zookeeper服务测试" class="headerlink" title="三、三台机器启动zookeeper服务测试"></a>三、三台机器启动zookeeper服务测试</h1><h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><p>三台机器分别启动zookeeper服务<br>这个命令三台机器都要执行<br>&#x2F;export&#x2F;server&#x2F;zookeeper&#x2F;bin&#x2F;zkServer.sh start</p>
+<p><img src="/../imagek/15.png"></p>
+<p><img src="/../imagek/16.png"></p>
+<p>三台主机分别查看启动状态<br>&#x2F;export&#x2F;server&#x2F;zookeeper&#x2F;bin&#x2F;zkServer.sh status</p>
+<p><img src="/../imagek/17.png"></p>
+<p><img src="/../imagek/18.png"></p>
+<h2 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h2><p>启动（每台机器）<br>zkServer.sh start 或者编写一个脚本来批量启动所有机器：</p>
+<p><img src="/../imagek/19.png"></p>
+<p><img src="/../imagek/20.png"></p>
+<p><img src="/../imagek/21.png"></p>
+<h3 id="方法1："><a href="#方法1：" class="headerlink" title="方法1："></a>方法1：</h3><p>for host in “node1 node2 node3”<br>do<br>   ssh $host “source&#x2F;etc&#x2F;profile;&#x2F;export&#x2F;server&#x2F;zookeeper&#x2F;bin&#x2F;zkServer.sh start”<br>done<br>方法2：<br>1.创建&#x2F;export&#x2F;server&#x2F;start&#x2F;zk_start目录<br>mkdir &#x2F;export&#x2F;shell<br>2.编辑创建zk.sh<br>vim zkall.sh<br>3.写shell脚本</p>
+<p><img src="/../imagek/22.png"></p>
+<p>4.配置zk脚本环境变量<br>#ZOOKEEPER_SHELL_HOME<br>export ZKS_HOME&#x3D;&#x2F;export&#x2F;shell&#x2F;<br>export PATH&#x3D;$PATH:$ZKS_HOME</p>
+<p>5.zookeeper的环境变量<br>export ZK_HOME&#x3D;&#x2F;export&#x2F;server&#x2F;zookeeper<br>export PATH&#x3D;${ZK_HOME}&#x2F;bin:$PATH</p>
+<p>6.让环境变量生效<br>source &#x2F;etc&#x2F;profile</p>
+<p>7.启动测试<br>chmod 777 &#x2F;export&#x2F;shell&#x2F;zkall.sh<br>zkall.sh start</p>
+<p><img src="/../imagek/23.png"></p>
+<p>启动成功，测试结束！</p>
+<h1 id="四、问题与总结"><a href="#四、问题与总结" class="headerlink" title="四、问题与总结"></a>四、问题与总结</h1><p>在本节zookeeper的的学习中我们了解和解决了zookeeper的的核心问题——Zookeeper 集群<br>在ZooKeeper集群服中务中有三个角色：<br>Leader 领导者 ： 处理事务请求； 集群内部各服务器的调度者<br>Follower 跟随者 ：处理客户端非事务请求，转发事务请求给Leader服务器； 参与Leader选举投票<br>Observer 观察者：处理客户端非事务请求，转发事务请求给Leader服务器</p>
+<p><img src="/../imagek/24.png"></p>
+<h3 id="同时，"><a href="#同时，" class="headerlink" title="同时，"></a>同时，</h3><p>我们通过对zookeeper的研究、安装、启动、运行、解决问题的一系列完成，对此了解越来越深：<br>ZooKeeper是一个分布式的，开放源码的分布式应用程序协调服务，是Google的Chubby一个开源的实现，是Hadoop和Hbase的重要组件。我们也通过思考和查询资料发现它是一个为分布式应用提供一致性服务的软件，探索归纳出zookeeper的功能：配置维护、域名服务、分布式同步、组服务等。通过这些功能，ZooKeeper 为分布式应用程序提供了一致性、可靠性和高效性的支持，简化了分布式系统的开发和管理。以此，我们可以利用zookeeper广泛应用于分布式数据库、分布式缓存、分布式锁、分布式协调和配置管理等场景。</p>
+<h3 id="综上，"><a href="#综上，" class="headerlink" title="综上，"></a>综上，</h3><p>我们也意识到ZooKeeper的目标就是封装好复杂易出错的关键服务，将简单易用的接口和性能高效、功能稳定的系统提供给用户。当客户端接收到事件信息，可以调用相应的行为来处理数据。Zookeeper的Wiki页面展示了如何使用Zookeeper来处理事件通知，队列，优先队列，锁，共享锁，可撤销的共享锁，两阶段提交。<br>最后，会看在这次实践，我们相互配合，历经自我学习，组合探究，积极向同学询问，查阅资料，获取了满意的结果，我们也十分骄傲，望继承优良传统，下次再接再厉！</p>
+<p>　</p>
+
+                </section>
+
+                
+                
+
+                
+
+            </article>
+
+            
+            <nav class="dis_flex al_post_nav">
+                <a class="al_post_nav_item dis_flex_acenter" href="/">
+                    
+                </a>
+                <a class="al_post_nav_item dis_flex_acenter" href="/2023/06/20/Sqoop%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/">
+                    
+                        <span class="al_text_ellipsis al_post_nav_desc">Sqoop配置文档</span>
+                        <svg class="al_arrow">
+                            <use xmlns="http://www.w3.org/2000/svg" xlink:href="/assets/svg_icons.svg#svg-arrow-right"></use>
+                        </svg>
+                    
+                </a>
+            </nav>
+        </div>
+    </div>
+
+
+        <div class="al_index_footer dis_flex_center">
+    <div class="al_index_footer_item al_index_footer_title">
+        John Doe
+    </div>
+
+    
+    
+
+    <div class="al_index_footer_item al_index_footer_extra">
+        Created By 
+        <a target="_blank" rel="noopener" href="https://github.com/iGuan7u/Acetolog">AcetoLog</a>
+         · Power By 
+        <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>
+    </div>
+
+    <div class="al_index_footer_item al_index_footer_extra_right">
+        All Right Reserved
+    </div>
+</div>
+
+        <script type="text/javascript" async="async" src="/javascripts/acelog.js"></script>
+        
+        
+        
+        
+        
+
+    </body>
+</html>
